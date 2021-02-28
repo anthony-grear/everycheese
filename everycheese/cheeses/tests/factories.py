@@ -3,9 +3,14 @@ from django.template.defaultfilters import slugify
 import factory
 import factory.fuzzy
 from everycheese.users.tests.factories import UserFactory 
+import pytest 
 
 from ..models import Cheese 
 
+@pytest.fixture
+def cheese(): 
+    return CheeseFactory()
+    
 class CheeseFactory(factory.django.DjangoModelFactory): 
     name = factory.fuzzy.FuzzyText() 
     slug = factory.LazyAttribute(lambda obj: slugify(obj.name)) 
